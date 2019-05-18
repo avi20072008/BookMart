@@ -1,0 +1,35 @@
+﻿@model Bookmart.ViewModel.SubscriberSubscriptionViewModel
+@{
+    ViewBag.Title = "Index";
+}
+
+<br/>
+<h2> Subscriber's List</h2>
+<br/>
+
+<div>
+    <a href="/subscribers/new" class="btn btn-primary"> Add New Subscriber</a>
+</div>
+<br/>
+<table border="1" class="table table-striped">
+    <thead>
+        <tr>
+            <th> Subscriber Name</th>
+            <th> Birth Date </th>
+            <th> Subscription </th>
+            <th> Discount</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var sub in Model.subscribers)
+        {
+            <tr>
+                <td> @sub.Name</td>    
+                <td> @sub.BirthDate.ToString("dd MMM yyyy")</td>
+                <td> @sub.Subscription.SubscriptionType</td>
+                <td> @sub.Subscription.Discount%</td>
+            </tr>
+        }
+    </tbody>
+
+</table>

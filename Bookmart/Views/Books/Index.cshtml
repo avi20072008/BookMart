@@ -1,0 +1,39 @@
+﻿@model Bookmart.ViewModel.BookGenreViewModel
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<br/>
+<h2>Books List</h2>
+<br/>
+
+<table border="1" class="table" id="tabSubscriber">
+    <thead>
+        <tr>
+            <th> Book Name</th>
+            <th> Genre</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var b in Model.books)
+        {
+            <tr>
+                
+                <td><a href="/books/edit/@b.Id">@b.Name</a></td>
+                <td>@b.Genre.GenreName</td>
+            </tr>
+        }
+    </tbody>
+
+</table>
+
+@section scripts
+{
+    <script>
+
+        $(function () {
+            $("#tabSubscriber").DataTable();
+        });
+    </script>
+}

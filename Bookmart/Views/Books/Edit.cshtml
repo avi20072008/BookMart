@@ -1,0 +1,30 @@
+﻿@model Bookmart.ViewModel.BookEditViewModel
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Modify Book Details</h2>
+
+<div class="dvContainer">
+    @using (Html.BeginForm("Save", "Books"))
+    {
+        <div class="form-group">
+            @Html.LabelFor(b => b.Book.Name)
+            @Html.TextBoxFor(b => b.Book.Name, new { @class = "form-control" })
+            @Html.ValidationMessageFor(b => b.Book.Name)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(b => b.Book.GenreId, "Genre")
+            @Html.DropDownListFor(b => b.Book.GenreId, new SelectList(Model.genres, "Id", "GenreName"), "Select Subscription", new { @class = "form-control" })
+            @Html.ValidationMessageFor(b=>b.Book.GenreId)
+        </div>
+        if (Model.Book != null)
+        {
+            @Html.HiddenFor(b => b.Book.Id)
+        }
+        <div class="form-group">
+            <input type="submit" value="Save" class="btn btn-primary" />
+        </div>
+
+    }
+</div>

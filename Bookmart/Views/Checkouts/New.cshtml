@@ -1,0 +1,132 @@
+﻿
+@{
+    ViewBag.Title = "New";
+}
+
+<h2>Checkout Station</h2>
+
+<form >
+    <div class="form-group">
+        <label>Subscriber</label>
+        <input name="q" id="txtSubs" class="form-control"/>
+    </div>
+
+    <div class="form-group">
+        <label>Book</label>
+        <input type="text" id="txtBooks" value="" class="form-control" />
+    </div>
+
+    <input class="btn btn-primary" id="butSearch" type="button" value="Submit">
+    <div style="height:200px; width:200px;" id="dvBox" >Selected Books : </div>
+</form>
+
+<style>
+    #dvBox{
+        margin-top:50px;
+        font-size:1.1em;
+    }
+    #dvBox li{
+        height:40px;
+        border:1px solid #ccc;
+        width:300px;
+        list-style:none;
+        padding:10px 0 10px 30px;
+        border-bottom:1px solid #ddd;
+    }
+</style>
+
+@section scripts
+{
+ <script src="~/Scripts/jquery.auto-complete.min.js"></script>
+
+<script>
+
+    $(function () {
+        var arrSubs = [];
+        var arrBooks = [];
+        var arrBooksIds = [];
+        var flag = 0;
+
+        var hostname = 'http://' + document.location.host;
+        
+            //var url = hostname + '/api/subs/search/' + $("#txtSearch").val();
+        var subUrl = hostname + '/api/subs/';
+        var bookUrl = hostname + '/api/books/';
+         
+        getSubs();
+        getBooks();
+
+        $("#butSearch").on("click", function () {
+            console.log($("#dvBox").children);
+            for (let i = 0; i < $("#dvBox").children.length; i++) {
+                alert($("#dvBox").children[i]);
+            }
+        });
+
+        $('#txtBooks').on('keydown', function (e) {
+            if (e.which == 13) {
+                $("#dvBox").append("<li>" + $('#txtBooks').val() + "</li>");
+                e.preventDefault();
+            }
+        });
+
+        function getSubs() {
+            $.ajax({
+                url: subUrl,
+                success: function (data) {
+                    console.log(data);
+                    for (var i = 0; i < data.length; i++) {
+                        arrSubs[i] = data[i]['Name'];
+                    }
+                }
+            });
+        }
+        function getBooks() {            
+            $.ajax({
+                url: bookUrl,
+                success: function (data) {
+                    console.log(data);
+                    for (var i = 0; i < data.length; i++) {
+                        arrBooks[i] = data[i]['Name'];
+                        arrBooksIds[i] = data[i]['Id'];
+                        }
+                    }
+            });
+        }
+
+
+        $('#txtSubs').autoComplete({
+            minChars: 2,
+            source: function (term, suggest) {
+                term = term.toLowerCase();
+                var choices = arrSubs;
+                var matches = [];
+                for (i = 0; i < choices.length; i++) {
+                    if (~choices[i].toLowerCase().indexOf(term)) matches.push(choices[i]);
+                    suggest(matches);
+                    console.log(matches[i]);
+                    $("#dvBox").text(matches[i]);
+                }
+            }
+        });
+
+        
+
+        $('#txtBooks').autoComplete({
+            minChars: 2,
+            source: function (term, suggest) {
+                term = term.toLowerCase();
+                var choices = arrBooks;
+                var matches = [];
+                for (i = 0; i < choices.length; i++) {
+                    if (~choices[i].toLowerCase().indexOf(term)) matches.push(choices[i]);
+                    suggest(matches);
+                }
+                
+            }
+        });
+
+    });
+</script>
+
+}
