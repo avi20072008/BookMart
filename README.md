@@ -16,6 +16,10 @@ d) Migrations [ Code First Approach ]
 
 To test Bookmart system,
 
+  First, run Database Migrations. 
+  
+  Launch Website and login using
+
   As a guest, use email id - guest@bookmart.com
   
   As a manager, user email id - manager@bookmart.com
