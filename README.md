@@ -10,7 +10,7 @@ a) There are search, sorting and pagination functionalities on Books page.
 
 b) Role based authorization provided.
 
-c) Custom validations provided [ User must be atleast 18 years to subscribe to this service. ] 
+c) Custom validations provided [ e.g User must be atleast 18 years to subscribe to this service.] 
 
 d) Migrations [ Code First Approach ]
 
