@@ -1,5 +1,5 @@
 # BookMart
-BookMart is a Book Subscription Service. Website is developed using ASP.Net, C# and HTML/CSS & jQuery.
+BookMart is a Book Subscription Service. Website is developed using ASP.Net, C# and jQuery.
 
 Subscriptions are Monthly and Annually. Subscriber can see list of all books. Subscriber can checkout max 5 books.  
 Application has 2 roles. Guest and Admin. Only Admin can modify existing books list and add new Subscribers to the system. 
